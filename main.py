@@ -5,6 +5,8 @@ from sklearn import metrics
 from sklearn import tree
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.model_selection import KFold
+from sklearn.model_selection import cross_val_score
 import seaborn as sn
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -52,3 +54,10 @@ plt.show()
 print(metrics.classification_report(y_test, pred, target_names=["Spam", "Ham"]))
 print(metrics.classification_report(y_test, pred_tree, target_names=["Spam", "Ham"]))
 print(metrics.classification_report(y_test, pred_random, target_names=["Spam", "Ham"]))
+
+# CrossValidation
+total_ft = cv.fit_transform(x)
+scores_svm = cross_val_score(m_svm, total_ft, y, cv=5)
+scores_tree = cross_val_score(clf, total_ft, y, cv=5)
+scores_forest = cross_val_score(forest, total_ft, y, cv=5)
+print(scores_svm,"\n", scores_tree, "\n", scores_forest)
